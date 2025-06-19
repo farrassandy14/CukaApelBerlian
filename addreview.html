@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Reviews - Cuka Apel Berlian</title>
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
+    <link rel="stylesheet" href="./assets/css/addreview.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo-icon"></div>
+                <span>Halo!!</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About Us</a>
+                <a href="#" class="nav-link">List Product</a>
+                <a href="#" class="nav-link">Faq</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+            
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Add Reviews</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a> | Add Reviews
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="review-form-wrapper">
+                <div class="review-form-container">
+                    <h2>Add Reviews</h2>
+                    <p class="form-description">
+                        Your email address will not be published. Required fields are marked <span class="required">*</span>
+                    </p>
+
+                    <form class="review-form" id="reviewForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                            </div>
+                        </div>
+
+                        <div class="rating-section">
+                            <label class="rating-label">Select Rating:</label>
+                            <div class="star-rating" id="starRating">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <input type="hidden" id="ratingValue" name="rating" value="0">
+                            <span class="rating-text" id="ratingText">Select a rating</span>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="review" name="review" placeholder="Your Review" rows="6" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Post Review
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon"></div>
+                        <span>CUKA APEL BERLIAN</span>
+                    </div>
+                    <p>Cuka Apel Berlian hadir sejak April 2025, menghadirkan produk kesehatan alami terbaik untuk Anda. Diproduksi dengan proses fermentasi alami untuk mendukung gaya hidup sehat dan seimbang.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Halaman</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Dapatkan Pembaruan</h4>
+                        <p>Dapatkan petunjuk, kiat & berita produk terbaru.</p>
+                        <div class="newsletter">
+                            <input type="email" placeholder="Email address">
+                            <button type="submit">🔍</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer-bawah">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>Copyright © 2025 cukaapelberlian. All Rights Reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Pusat Privasi</a>
+                        <a href="#">Syarat dan Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Star Rating System
+        const stars = document.querySelectorAll('.star');
+        const ratingValue = document.getElementById('ratingValue');
+        const ratingText = document.getElementById('ratingText');
+        let currentRating = 0;
+
+        const ratingTexts = {
+            0: 'Select a rating',
+            1: 'Poor',
+            2: 'Fair', 
+            3: 'Good',
+            4: 'Very Good',
+            5: 'Excellent'
+        };
+
+        stars.forEach((star, index) => {
+            // Hover effect
+            star.addEventListener('mouseenter', function() {
+                highlightStars(index + 1);
+            });
+
+            // Click effect
+            star.addEventListener('click', function() {
+                currentRating = index + 1;
+                ratingValue.value = currentRating;
+                ratingText.textContent = ratingTexts[currentRating];
+                updateStars();
+            });
+        });
+
+        // Mouse leave effect
+        document.getElementById('starRating').addEventListener('mouseleave', function() {
+            updateStars();
+        });
+
+        function highlightStars(rating) {
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('highlighted');
+                } else {
+                    star.classList.remove('highlighted');
+                }
+            });
+        }
+
+        function updateStars() {
+            stars.forEach((star, index) => {
+                star.classList.remove('highlighted');
+                if (index < currentRating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+
+        // Form submission
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (currentRating === 0) {
+                alert('Please select a rating before submitting your review.');
+                return;
+            }
+
+            const formData = new FormData(this);
+            const reviewData = {
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                rating: formData.get('rating'),
+                review: formData.get('review')
+            };
+
+            console.log('Review submitted:', reviewData);
+            alert('Thank you for your review! It has been submitted successfully.');
+            
+            // Reset form
+            this.reset();
+            currentRating = 0;
+            ratingValue.value = 0;
+            ratingText.textContent = 'Select a rating';
+            updateStars();
+        });
+    </script>
+</body>
+</html>
