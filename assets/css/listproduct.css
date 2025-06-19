@@ -130,7 +130,6 @@ body {
     height: 80vh;
     display: flex;
     align-items: center;
-    justify-content: center;
     margin-top: 0; /* Removed margin-top since navbar is transparent */
     position: relative;
 }
@@ -138,7 +137,8 @@ body {
 .hero-content {
     text-align: center;
     color: white;
-    margin-top: 80px; /* Added margin-top to push content down */
+    margin-left: 5%;
+    max-width: 600px;
 }
 
 .hero-content h1 {
@@ -151,6 +151,7 @@ body {
 .breadcrumb {
     font-size: 1.1rem;
     opacity: 0.9;
+    text-align: left;
 }
 
 .breadcrumb a {
@@ -187,92 +188,96 @@ body {
     font-weight: 600;
 }
 
-/* Container untuk semua produk */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
-  padding: 20px;
+/* Container grid utama tetap */
+.product-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 32px;
+    max-width: 1024px;     
+    margin: 40px auto;
+    padding: 0 20px;
+    border-color: #555;
 }
 
-/* Card produk */
+/* Kartu produk */
 .product-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  text-align: center;
-  transition: transform 0.3s;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.3s ease;
+    border: 1px solid #AFAEAE;
+    min-height: 350px; 
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);  
 }
 
-/* Container gambar produk */
+/* Gambar produk langsung tanpa lingkaran */
 .product-image-container {
-  position: relative;
-  margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    margin-bottom: 8px;
 }
 
-/* Lingkaran latar belakang */
-.product-circle {
-  background: linear-gradient(135deg, #e6ffcc, #b3ff99);
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Gambar produk */
 .product-image {
-  width: 60px;
-  height: auto;
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px; 
 }
 
-/* Rating bintang */
+/* Bintang rating */
 .star-rating {
-  color: gold;
-  margin-bottom: 8px;
-}
+    color: #ffc107;
+    font-size: 16px;
 
-.star {
-  font-size: 16px;
 }
 
 /* Nama produk */
 .product-name {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
 }
 
-/* Harga dan tombol */
+/* Harga + dropdown */
 .price-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .price {
-  font-size: 16px;
-  font-weight: bold;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
 }
 
 .price-dropdown {
-  background: #e6ffcc;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+    background-color: #d4f8af;
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.price-dropdown i {
+    color: #000;
+    font-size: 12px;
 }
 
 /* Responsive Design */
@@ -299,6 +304,56 @@ body {
         padding: 0 0.5rem;
     }
 }
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pagination-btn {
+  background-color: #d4f8af;
+  border: none;
+  padding: 14px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-number {
+  background-color: white;
+  border: 1px solid #d4f8af;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pagination-number.active {
+  background-color: #00c853;
+  color: white;
+  border: none;
+}
+
+.pagination-ellipsis {
+  color: #999;
+  font-size: 16px;
+  user-select: none;
+}
+
 
 /* Footer */
 .footer {
