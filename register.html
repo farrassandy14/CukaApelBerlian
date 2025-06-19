@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Cuka Apel Berlian</title>
     <link rel="stylesheet" href="./assets/css/register.css">
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+<!-- Header -->
+    <header class="header" id="header">
         <div class="container">
             <div class="nav-brand">
                 <span>Halo, Farras Sandy Harsoyo</span>
             </div>
-            <nav class="nav-menu">
+            <nav class="nav-menu" id="navMenu">
                 <a href="#" class="nav-link">Home</a>
                 <a href="#" class="nav-link">About Us</a>
                 <a href="#" class="nav-link">List Product</a>
                 <a href="#" class="nav-link">Faq</a>
                 <a href="#" class="nav-link">Contact</a>
             </nav>
-            <button class="menu-toggle">
+            <button class="menu-toggle" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -85,8 +87,15 @@
                                     <li>Ukuran maksimal: 5MB</li>
                                 </ul>
                             </div>
+                            
                         </div>
+                        <div class="Punya-akun">
+                                     <p>
+                                Punya akun? <a href="/login.html" style="padding-bottom: 12px; text-decoration: none ;">Login</a>
+                            </p>
 
+                        </div>
+                 
                         <button type="submit" class="register-btn">Register</button>
                     </form>
 
@@ -160,6 +169,19 @@
                 </div>
             </div>
     </section>
+    
+    <script>
+         // Header scroll effect - DIPERBAIKI
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Ketika scroll lebih dari 50px
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 
     <script src="./assets/js/script.js"></script>
 </body>

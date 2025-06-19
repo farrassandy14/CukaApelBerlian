@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Cuka Apel Berlian</title>
 <link rel="stylesheet" href="./assets/css/login.css">
+<link rel="stylesheet" href="./assets/css/header.css">
+<link rel="stylesheet" href="./assets/css/footer.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+<!-- Header -->
+    <header class="header" id="header">
         <div class="container">
             <div class="nav-brand">
                 <span>Halo, Farras Sandy Harsoyo</span>
             </div>
-            <nav class="nav-menu">
+            <nav class="nav-menu" id="navMenu">
                 <a href="#" class="nav-link">Home</a>
                 <a href="#" class="nav-link">About Us</a>
                 <a href="#" class="nav-link">List Product</a>
                 <a href="#" class="nav-link">Faq</a>
                 <a href="#" class="nav-link">Contact</a>
             </nav>
-            <button class="menu-toggle">
+            <button class="menu-toggle" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -141,6 +143,17 @@
     </section>
 
     <script>
+          // Header scroll effect - DIPERBAIKI
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Ketika scroll lebih dari 50px
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Mobile Navigation Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
@@ -168,7 +181,6 @@
             
             if (email && password) {
                 alert('Login berhasil! (Demo)');
-                // Here you would typically send the data to your server
                 console.log('Email:', email);
                 console.log('Password:', password);
             } else {
@@ -179,36 +191,10 @@
         // Social Login Handlers
         document.getElementById('googleLogin').addEventListener('click', () => {
             alert('Login dengan Google (Demo)');
-            // Implement Google OAuth here
         });
 
-        document.getElementById('githubLogin').addEventListener('click', () => {
-            alert('Login dengan GitHub (Demo)');
-            // Implement GitHub OAuth here
-        });
-
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Header Background on Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.95)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.8)';
-            }
+        document.getElementById('facebookLogin').addEventListener('click', () => {
+            alert('Login dengan Facebook (Demo)');
         });
 
         // Form Input Focus Effects
@@ -224,7 +210,7 @@
         });
 
         // Loading Animation for Login Button
-        const loginBtn = document.querySelector('.login-btn');
+        const loginBtn = document.querySelector('.register-btn');
         loginBtn.addEventListener('click', function() {
             const originalText = this.textContent;
             this.textContent = 'Loading...';
@@ -234,6 +220,20 @@
                 this.textContent = originalText;
                 this.disabled = false;
             }, 2000);
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>

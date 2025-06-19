@@ -526,3 +526,4 @@ registerForm.addEventListener('submit', () => {
         console.warn('Could not clear saved form data');
     }
 });
+
