@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Information - Cuka Apel Berlian</title>
+    <link rel="stylesheet" href="./assets/css/profile.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="profile-header">
+        <div class="profile-nav-container">
+            <div class="profile-brand">
+                <span class="profile-brand-text">Halo, Farras Sandy Harsoyo</span>
+            </div>
+            <nav class="profile-nav-menu">
+                <a href="#" class="profile-nav-link">Home</a>
+                <a href="#" class="profile-nav-link">About Us</a>
+                <a href="#" class="profile-nav-link">List Product</a>
+                <a href="#" class="profile-nav-link">Faq</a>
+                <a href="#" class="profile-nav-link">Contact</a>
+                <img src="./assets/image/FotoProfile.svg" alt="User Avatar" class="profile-user-avatar">
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="profile-main-wrapper profile-loading">
+        <!-- Profile Image Section -->
+        <aside class="profile-image-section">
+            <div class="profile-avatar-container">
+                <img src="./assets/image/FotoProfile.svg" alt="Profile Avatar" class="profile-main-avatar" id="profileMainAvatar">
+                <button class="profile-avatar-edit" id="profileAvatarEdit" aria-label="Edit Profile Picture">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="profile-image-hint">Klik foto untuk mengganti profil</p>
+            <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+        </aside>
+
+        <!-- Profile Form Section -->
+        <section class="profile-form-section">
+            <h1 class="profile-section-title">Profile Information</h1>
+            
+            <div class="profile-success-message" id="profileSuccessMessage">
+                Profil berhasil diperbarui!
+            </div>
+
+            <form id="profileUpdateForm">
+                <!-- Basic Information -->
+                <div class="profile-form-grid">
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileNama">Nama</label>
+                        <input type="text" id="profileNama" name="nama" class="profile-input-field" value="Farras Sandy Harsoyo">
+                    </div>
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileEmail">Email</label>
+                        <input type="email" id="profileEmail" name="email" class="profile-input-field" value="farrassandy@webmail.unm.ac.id">
+                    </div>
+                </div>
+
+                <div class="profile-form-grid">
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileUsername">Username</label>
+                        <input type="text" id="profileUsername" name="username" class="profile-input-field" value="farrassandy">
+                    </div>
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileTelepon">No. Telepon</label>
+                        <input type="tel" id="profileTelepon" name="telepon" class="profile-input-field" value="082282836870">
+                    </div>
+                </div>
+
+                <div class="profile-form-grid">
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileAlamat">Alamat</label>
+                        <input type="text" id="profileAlamat" name="alamat" class="profile-input-field" value="Jalan Joyoagung No.45">
+                    </div>
+                    <div class="profile-input-group profile-date-input">
+                        <label class="profile-input-label" for="profileTanggalLahir">Tanggal Lahir</label>
+                        <input type="date" id="profileTanggalLahir" name="tanggal_lahir" class="profile-input-field" value="2004-06-16">
+                    </div>
+                </div>
+
+                <!-- Bio Section -->
+                <div class="profile-form-grid full-width">
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileBio">Bio</label>
+                        <textarea id="profileBio" name="bio" class="profile-input-field profile-textarea" placeholder="Ceritakan tentang diri Anda...">Hai</textarea>
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="profile-form-grid full-width">
+                    <div class="profile-input-group">
+                        <label class="profile-input-label" for="profileSocialMedia">Link Social Media</label>
+                        <input type="url" id="profileSocialMedia" name="social_media" class="profile-input-field" placeholder="https://instagram.com/username atau https://twitter.com/username">
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="profile-actions">
+                    <button type="submit" class="profile-btn profile-btn-primary">Simpan Perubahan</button>
+                    <button type="button" class="profile-btn profile-btn-secondary" id="profileCancelBtn">Batalkan</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                        </div>
+                        <img src="image/Logo.png" style="width: 30%" alt="">
+                        <span>CUKA APEL BERLIAN</span>
+                    </div>
+                    <p>Cuka Apel Berlian hadir sejak April 2025, menghadirkan produk kesehatan alami yang diformulasikan dari apel pilihan dengan proses fermentasi alami untuk mendukung gaya hidup sehat dan seimbang.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Halaman</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">List Product</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Dapatkan Pembaruan</h4>
+                        <p>Dapatkan penunjuk, kiat & berita produk terbaru.</p>
+                        <div class="newsletter">
+                            <input type="email" placeholder="Masukkan email Anda">
+                            <button type="submit">
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        </div>
+    </footer>
+
+    <section id="footer-bawah">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>Copyright © 2025 cukaapelberlian. All Rights Reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Pusat Privasi</a>
+                        <a href="#">Syarat dan Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+    </section> 

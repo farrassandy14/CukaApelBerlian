@@ -526,3 +526,344 @@ registerForm.addEventListener('submit', () => {
         console.warn('Could not clear saved form data');
     }
 });
+
+// Profile page specific JavaScript
+class ProfileManager {
+    constructor() {
+        this.initializeElements();
+        this.bindEvents();
+        this.loadProfileData();
+    }
+
+    initializeElements() {
+        this.form = document.getElementById('profileUpdateForm');
+        this.avatarEdit = document.getElementById('profileAvatarEdit');
+        this.imageInput = document.getElementById('profileImageInput');
+        this.mainAvatar = document.getElementById('profileMainAvatar');
+        this.successMessage = document.getElementById('profileSuccessMessage');
+        this.cancelBtn = document.getElementById('profileCancelBtn');
+        this.originalData = {};
+    }
+
+    bindEvents() {
+        // Avatar edit functionality
+        this.avatarEdit.addEventListener('click', () => {
+            this.imageInput.click();
+        });
+
+        // Image upload handler
+        this.imageInput.addEventListener('change', (e) => {
+            this.handleImageUpload(e);
+        });
+
+        // Form submission
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleFormSubmit();
+        });
+
+        // Cancel button
+        this.cancelBtn.addEventListener('click', () => {
+            this.resetForm();
+        });
+
+        // Auto-save on input change (debounced)
+        this.setupAutoSave();
+
+        // Phone number formatting
+        const phoneInput = document.getElementById('profileTelepon');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', this.formatPhoneNumber);
+        }
+    }
+
+    handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        // Validate file type
+        if (!file.type.match(/^image\/(jpeg|jpg|png|gif)$/)) {
+            this.showNotification('Format file tidak didukung. Gunakan JPG, PNG, atau GIF.', 'error');
+            return;
+        }
+
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+            this.showNotification('Ukuran file terlalu besar. Maksimal 5MB.', 'error');
+            return;
+        }
+
+        // Create preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.mainAvatar.src = e.target.result;
+            this.showNotification('Foto profil berhasil diperbarui!', 'success');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    handleFormSubmit() {
+        const formData = new FormData(this.form);
+        const profileData = Object.fromEntries(formData.entries());
+
+        // Validate required fields
+        if (!this.validateForm(profileData)) {
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = this.form.querySelector('.profile-btn-primary');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Menyimpan...';
+        submitBtn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+            this.saveProfile(profileData);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, 1500);
+    }
+
+    validateForm(data) {
+        const errors = [];
+
+        if (!data.nama.trim()) errors.push('Nama harus diisi');
+        if (!data.email.trim()) errors.push('Email harus diisi');
+        if (!this.isValidEmail(data.email)) errors.push('Format email tidak valid');
+        if (!data.username.trim()) errors.push('Username harus diisi');
+        if (data.username.length < 3) errors.push('Username minimal 3 karakter');
+
+        if (errors.length > 0) {
+            this.showNotification('Terdapat kesalahan:\n' + errors.join('\n'), 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    saveProfile(data) {
+        // Store original data for reset functionality
+        this.originalData = { ...data };
+
+        // Show success message
+        this.successMessage.classList.add('show');
+        setTimeout(() => {
+            this.successMessage.classList.remove('show');
+        }, 5000);
+
+        // Update page title with new name
+        const brandText = document.querySelector('.profile-brand-text');
+        if (brandText && data.nama !== brandText.textContent.replace('Halo, ', '')) {
+            brandText.textContent = `Halo, ${data.nama}`;
+        }
+
+        this.showNotification('Profil berhasil diperbarui!', 'success');
+    }
+
+    resetForm() {
+        if (Object.keys(this.originalData).length > 0) {
+            Object.keys(this.originalData).forEach(key => {
+                const input = this.form.querySelector(`[name="${key}"]`);
+                if (input) {
+                    input.value = this.originalData[key];
+                }
+            });
+            this.showNotification('Perubahan dibatalkan', 'info');
+        }
+    }
+
+    loadProfileData() {
+        // Store initial form data as original data
+        const formData = new FormData(this.form);
+        this.originalData = Object.fromEntries(formData.entries());
+    }
+
+    setupAutoSave() {
+        let autoSaveTimeout;
+        const inputs = this.form.querySelectorAll('input, textarea, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                clearTimeout(autoSaveTimeout);
+                autoSaveTimeout = setTimeout(() => {
+                    this.autoSaveProfile();
+                }, 2000);
+            });
+        });
+    }
+
+    autoSaveProfile() {
+        // Only auto-save if there are changes
+        const currentData = Object.fromEntries(new FormData(this.form).entries());
+        const hasChanges = Object.keys(currentData).some(key => 
+            currentData[key] !== this.originalData[key]
+        );
+
+        if (hasChanges) {
+            console.log('Auto-saving profile changes...');
+            // Here you would typically send the data to your backend
+            // Example API call:
+            // this.sendToAPI(currentData);
+        }
+    }
+
+    formatPhoneNumber(event) {
+        let value = event.target.value.replace(/\D/g, '');
+        
+        // Indonesian phone number formatting
+        if (value.startsWith('62')) {
+            value = value.substring(2);
+        }
+        if (value.startsWith('0')) {
+            value = value.substring(1);
+        }
+        
+        // Add formatting
+        if (value.length > 0) {
+            value = '0' + value;
+            if (value.length > 4) {
+                value = value.substring(0, 4) + '-' + value.substring(4);
+            }
+            if (value.length > 9) {
+                value = value.substring(0, 9) + '-' + value.substring(9);
+            }
+            if (value.length > 14) {
+                value = value.substring(0, 14);
+            }
+        }
+        
+        event.target.value = value;
+    }
+
+    showNotification(message, type = 'info') {
+        // Remove existing notifications
+        document.querySelectorAll('.profile-notification').forEach(n => n.remove());
+
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = `profile-notification profile-notification-${type}`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#d4edda' : type === 'error' ? '#f8d7da' : '#d1ecf1'};
+            color: ${type === 'success' ? '#155724' : type === 'error' ? '#721c24' : '#0c5460'};
+            border: 1px solid ${type === 'success' ? '#c3e6cb' : type === 'error' ? '#f5c6cb' : '#bee5eb'};
+            padding: 15px 20px;
+            border-radius: 8px;
+            max-width: 350px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+        `;
+        
+        notification.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                <span>${message.replace(/\n/g, '<br>')}</span>
+                <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; font-size: 18px; cursor: pointer; opacity: 0.7; padding: 0; line-height: 1;">&times;</button>
+            </div>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }
+        }, 5000);
+    }
+
+    // Additional utility methods
+    sendToAPI(data) {
+        // Example API integration
+        return fetch('/api/profile/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                this.showNotification('Profil berhasil disimpan!', 'success');
+            } else {
+                this.showNotification('Gagal menyimpan profil: ' + result.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            this.showNotification('Terjadi kesalahan saat menyimpan profil', 'error');
+        });
+    }
+
+    // Password strength checker (if needed)
+    checkPasswordStrength(password) {
+        const strength = {
+            score: 0,
+            feedback: []
+        };
+
+        if (password.length >= 8) strength.score++;
+        else strength.feedback.push('Minimal 8 karakter');
+
+        if (/[a-z]/.test(password)) strength.score++;
+        else strength.feedback.push('Harus mengandung huruf kecil');
+
+        if (/[A-Z]/.test(password)) strength.score++;
+        else strength.feedback.push('Harus mengandung huruf besar');
+
+        if (/[0-9]/.test(password)) strength.score++;
+        else strength.feedback.push('Harus mengandung angka');
+
+        if (/[^A-Za-z0-9]/.test(password)) strength.score++;
+        else strength.feedback.push('Harus mengandung karakter khusus');
+
+        return strength;
+    }
+
+    // Cleanup method
+    destroy() {
+        // Remove event listeners and clean up
+        const inputs = this.form.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.removeEventListener('input', this.autoSaveProfile);
+        });
+        
+        document.querySelectorAll('.profile-notification').forEach(n => n.remove());
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on a profile page
+    if (document.getElementById('profileUpdateForm')) {
+        window.profileManager = new ProfileManager();
+    }
+});
+
+// Export for module systems
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ProfileManager;
+}
