@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Cuka Apel Berlian</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo"></div>
+                <span>Halo, Farras Sandy Harsayo</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About Us</a>
+                <a href="#" class="nav-link">List Product</a>
+                <a href="#" class="nav-link">Faq</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Register</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a> | <span>Register</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="register-section">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/400x600/4a5568/ffffff?text=Product+Image" alt="Cuka Apel Berlian Product" id="productImg">
+                </div>
+                <div class="register-form-container">
+                    <h2>Register</h2>
+                    <p class="form-description">
+                        Syarat dan ketentuan dibuat untuk melindungi hak dan kepentingan semua pihak yang terlibat dalam proses pendaftaran. Membaca dan memahami syarat dan ketentuan akan membantu Anda menghindari kesalahpahaman dan permasalahan di kemudian hari.<span class="highlight">Baca Disini</span><br>
+                        Mohon baca syarat dan ketentuan sebelum mendaftar.
+                    </p>
+                    
+                    <form class="register-form" id="registerForm">
+                        <div class="form-group">
+                            <label for="nama">Nama:</label>
+                            <input type="text" id="nama" name="nama" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" required>
+                            <small class="password-hint">Password harus minimal 8 karakter dengan huruf besar, huruf kecil, angka, dan simbol.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto">Foto Profil:</label>
+                            <input type="file" id="foto" name="foto" accept="image/*">
+                            <div class="file-requirements">
+                                <p><strong>Ketentuan Gambar:</strong></p>
+                                <ul>
+                                    <li>Format: JPG atau PNG</li>
+                                    <li>Rasio 1:1 (Bentuk persegi)</li>
+                                    <li>Ukuran maksimal: 5MB</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="register-btn">Register</button>
+                    </form>
+
+                    <div class="social-register">
+                        <p>Atau register dengan:</p>
+                        <div class="social-buttons">
+                            <button class="social-btn google-btn">
+                                <img src="https://via.placeholder.com/20x20/4285f4/ffffff?text=G" alt="Google">
+                            </button>
+                            <button class="social-btn github-btn">
+                                <img src="https://via.placeholder.com/20x20/333333/ffffff?text=Gh" alt="GitHub">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon"></div>
+                        <span>CUKA APEL BERLIAN</span>
+                    </div>
+                    <p>Cuka Apel Berlian hadir sejak April 2025, menghadirkan produk kesehatan alami yang diformulasikan dari apel pilihan dengan proses fermentasi alami untuk mendukung gaya hidup sehat dan seimbang.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Halaman</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">List Product</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Dapatkan Pembaruan</h4>
+                        <p>Dapatkan penunjuk, kiat & berita produk terbaru.</p>
+                        <div class="newsletter">
+                            <input type="email" placeholder="Masukkan email Anda">
+                            <button type="submit">
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>Copyright © 2025 cukaapelberlian. All Rights Reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Pusat Privasi</a>
+                        <a href="#">Syarat dan Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
