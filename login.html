@@ -4,575 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Cuka Apel Berlian</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .logo::before {
-            content: '🍎';
-            margin-right: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            color: #4CAF50;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 400px;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%234a5d23" width="1200" height="400"/><path fill="%235a6d33" d="M0 200c200-50 400 50 600 0s400-50 600 0v200H0z"/><rect fill="%236a7d43" y="300" width="1200" height="100" opacity="0.5"/></svg>');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            color: white;
-            padding: 0 2rem;
-            margin-top: 70px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .breadcrumb a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: white;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 4rem 2rem;
-            background: #f5f5f5;
-        }
-
-        .login-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .product-showcase {
-            text-align: center;
-        }
-
-        .product-image {
-            width: 300px;
-            height: 400px;
-            background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
-            border-radius: 20px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-person {
-            width: 200px;
-            height: 280px;
-            background: linear-gradient(135deg, #4a5d23, #6a7d43);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-person::before {
-            content: '👨‍💼';
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-        }
-
-        .product-bottle {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 100px;
-            background: linear-gradient(45deg, #8B4513, #CD853F);
-            border-radius: 5px 5px 15px 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .product-bottle::before {
-            content: 'BIO VITTO';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 8px;
-            color: white;
-            font-weight: bold;
-        }
-
-        /* Login Form */
-        .login-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-form h2 {
-            color: #4CAF50;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .login-description {
-            color: #666;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-
-        .register-link {
-            color: #666;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .register-link a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        .login-btn {
-            background: #4CAF50;
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-bottom: 1.5rem;
-        }
-
-        .login-btn:hover {
-            background: #45a049;
-        }
-
-        .social-login {
-            margin-bottom: 1.5rem;
-        }
-
-        .social-login p {
-            margin-bottom: 1rem;
-            color: #666;
-        }
-
-        .social-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-btn {
-            width: 45px;
-            height: 45px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .social-btn:hover {
-            border-color: #4CAF50;
-            transform: translateY(-2px);
-        }
-
-        .forgot-password {
-            color: #666;
-        }
-
-        .forgot-password a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        /* Footer */
-        .footer {
-            background: #4CAF50;
-            color: white;
-            padding: 3rem 2rem 1rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-section p,
-        .footer-section li {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            margin-top: 2rem;
-            padding-top: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.95);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .login-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .product-image {
-                width: 250px;
-                height: 320px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+<link rel="stylesheet" href="./assets/css/login.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="nav-container">
-            <a href="#" class="logo">Halo, Farras Sandy Hersoyo</a>
-            <nav>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#products">List Product</a></li>
-                    <li><a href="#faq">Faq</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+        <div class="container">
+            <div class="nav-brand">
+                <span>Halo, Farras Sandy Harsoyo</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About Us</a>
+                <a href="#" class="nav-link">List Product</a>
+                <a href="#" class="nav-link">Faq</a>
+                <a href="#" class="nav-link">Contact</a>
             </nav>
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
-    <!-- Hero Section -->
+  <!-- Hero Section -->
     <section class="hero">
-        <h1>Login</h1>
-        <div class="breadcrumb">
-            <a href="#home">Home</a>
-            <span>|</span>
-            <span>Login</span>
+        <div class="hero-content">
+            <h1>Login</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a> | <span>Login</span>
+            </div>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="login-container">
-            <!-- Product Showcase -->
-            <div class="product-showcase">
+        <div class="container">
+            <div class="register-section">
                 <div class="product-image">
-                    <div class="product-person">
-                        <div class="product-bottle"></div>
-                    </div>
+                    <img src="./assets/image/RegisterFig.svg" alt="Cuka Apel Berlian Product" id="productImg">
                 </div>
-            </div>
-
-            <!-- Login Form -->
-            <div class="login-form">
-                <h2>Login</h2>
-                <p class="login-description">
-                    Masuk ke platform kami dengan mudah menggunakan <strong>Email</strong> dan <strong>Password</strong> 
-                    untuk mendapatkan akses penuh!
-                </p>
-
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-
-                    <p class="register-link">
-                        Jika belum punya akun, <a href="#register">daftar sekarang</a>.
+                <div class="register-form-container">
+                    <h2>Login</h2>
+                    <p class="form-description">
+                        Masuk ke platform kami dengan mudah menggunakan Email dan Password
+                        untuk mendapatkan akses penuh!
                     </p>
+                    
+                    <form class="register-form" id="registerForm">
 
-                    <button type="submit" class="login-btn">Login</button>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
 
-                    <div class="social-login">
-                        <p>Atau login dengan:</p>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" required>
+                            <small class="password-hint">Password harus minimal 8 karakter dengan huruf besar, huruf kecil, angka, dan simbol.</small>
+                        </div>
+
+                        <button type="submit" class="register-btn">Login</button>
+                    </form>
+
+                    <div class="social-register">
+                        <p>Atau Login dengan:</p>
                         <div class="social-buttons">
-                            <div class="social-btn" id="googleLogin">
-                                <span style="color: #db4437;">G</span>
-                            </div>
-                            <div class="social-btn" id="githubLogin">
-                                <span style="color: #333;">⚡</span>
-                            </div>
+                            <button class="social-btn google-btn">
+                                <img src="data:image/png;base64,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" alt="Google">
+                            </button>
+                            <button class="social-btn github-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="Facebook">
+                            </button>
                         </div>
                     </div>
-
-                    <p class="forgot-password">
-                        Lupa Password? <a href="#reset">reset sekarang</a>.
-                    </p>
-                </form>
+                </div>
             </div>
         </div>
     </main>
 
+
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>🍎 CUKA APEL BERLIAN</h3>
-                <p>
-                    Cuka Apel Berlian hadir sejak April 2025, 
-                    menghadirkan produk kesehatan alami 
-                    yang diformulasikan dari apel pilihan 
-                    dengan proses fermentasi alami untuk 
-                    mendukung gaya hidup sehat dan seimbang.
-                </p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                        </div>
+                        <img src="./assets/image/LogoCAB.svg" style="width: 30%" alt="">
+                        <span>CUKA APEL BERLIAN</span>
+                    </div>
+                    <p>Cuka Apel Berlian hadir sejak April 2025, menghadirkan produk kesehatan alami yang diformulasikan dari apel pilihan dengan proses fermentasi alami untuk mendukung gaya hidup sehat dan seimbang.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Halaman</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">List Product</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Dapatkan Pembaruan</h4>
+                        <p>Dapatkan penunjuk, kiat & berita produk terbaru.</p>
+                        <div class="newsletter">
+                            <input type="email" placeholder="Masukkan email Anda">
+                            <button type="submit">
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="footer-section">
-                <h3>Halaman</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#products">List Product</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Dapatkan Pembaruan</h3>
-                <p>Dapatkan petunjuk, kiat & berita produk terbaru.</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>Copyright © 2025 cukaapelberlian. All Rights Reserved.</p>
-            <div class="footer-links">
-                <a href="#privacy">Pusat Privasi</a>
-                <a href="#terms">Syarat dan Ketentuan</a>
-            </div>
+        
         </div>
     </footer>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/6281234567890" class="whatsapp-btn" target="_blank">
-        💬
-    </a>
+    <section id="footer-bawah">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>Copyright © 2025 cukaapelberlian. All Rights Reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Pusat Privasi</a>
+                        <a href="#">Syarat dan Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+    </section>
 
     <script>
         // Mobile Navigation Toggle

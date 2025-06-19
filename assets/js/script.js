@@ -24,6 +24,8 @@ menuToggle.addEventListener('click', () => {
     }
 });
 
+
+
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
