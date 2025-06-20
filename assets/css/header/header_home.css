@@ -1,0 +1,152 @@
+/* Header Styles - Updated for transparency */
+.header {
+  background: rgba(0, 0, 0, 0); /* More transparent */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Reduced blur for more transparency */
+  -webkit-backdrop-filter: blur(5px);
+  transition: background 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(0, 0, 0, 0.8); /* Darker when scrolled */
+  backdrop-filter: blur(10px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles - Diperbaiki untuk scroll effect */
+.header {
+  background: rgba(0, 0, 0, 0.1); /* Mulai dengan sangat transparan */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: all 0.3s ease; /* Transisi untuk semua properti */
+  padding: 25px 0;
+}
+
+.header.scrolled {
+  background: rgba(0, 0, 0, 0.3); /* Hampir hitam penuh saat scroll */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-weight: 500;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link:hover {
+  color: #4caf50;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 3px 0;
+  background: white;
+  transition: 0.3s;
+}
+
+.login-form-container {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-form-container h2 {
+  font-size: 2.5rem;
+  color: #4caf50;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    /* Reduced overlay opacity */ url("../../image/homebgw.svg") center/cover;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  margin-top: 0; /* Removed margin-top since navbar is transparent */
+  position: relative;
+}
+
+.hero-content {
+  text-align: justify;
+  color: white;
+  margin-left: 5%; /* Posisi di kiri dengan margin */
+  max-width: 600px; /* Batasi lebar content */
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 100;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.breadcrumb {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  text-align: left;
+}
+
+.breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
